@@ -46,7 +46,7 @@ class Url {
 	 * @return	string
  	*/
 	public function link($route, $args = '', $secure = false) {
-		if ($this->ssl && $secure) {
+		if ($this->ssl && ($secure || $_SERVER['HTTPS'])) {
 			$url = $this->ssl . 'index.php?route=' . $route;
 		} else {
 			$url = $this->url . 'index.php?route=' . $route;
