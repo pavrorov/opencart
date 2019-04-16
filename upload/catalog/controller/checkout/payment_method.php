@@ -77,6 +77,34 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				}
 			}
 
+			if (isset($this->session->data['shipping_method']['code'])) {
+				foreach($method_data as $code => $method) {
+					$shipping = $this->config->get($method['code'].'_shipping');
+					if (!$shipping && isset($method['basecode']))
+						$shipping =
+							$this->config->get($method['basecode'].'_shipping');
+					if ($shipping) {
+						$shipping = explode(',', $shipping);
+						$shipping_method = $this->session->data['shipping_method']['code'];
+						$trim_pos = strpos($shipping_method, '.');
+						if ($trim_pos)
+							$shipping_method = substr($shipping_method, 0, $trim_pos);
+						$neg = $this->config->get($method['code'].'_shipping_neg');
+						if (!isset($neg) && isset($method['basecode']))
+							$neg = $this->config->get($method['basecode'].'_shipping_neg');
+						if (in_array($shipping_method, $shipping)) {
+							if ($neg) {
+								unset($method_data[$code]);
+							}
+						} else {
+							if (!$neg) {
+								unset($method_data[$code]);
+							}
+						}
+					}
+				}
+			}
+
 			$sort_order = array();
 
 			foreach ($method_data as $key => $value) {
