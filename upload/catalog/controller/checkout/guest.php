@@ -178,21 +178,21 @@ class ControllerCheckoutGuest extends Controller {
 				$json['error']['telephone'] = $this->language->get('error_telephone');
 			}*/
 
-			if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
+			/*if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
 				$json['error']['address_1'] = $this->language->get('error_address_1');
 			}
 
 			if ((utf8_strlen(trim($this->request->post['city'])) < 2) || (utf8_strlen(trim($this->request->post['city'])) > 128)) {
 				$json['error']['city'] = $this->language->get('error_city');
-			}
+			}*/
 
 			$this->load->model('localisation/country');
 
 			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 
-			if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
+			/*if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
 				$json['error']['postcode'] = $this->language->get('error_postcode');
-			}
+			}*/
 
 			if ($this->request->post['country_id'] == '') {
 				$json['error']['country'] = $this->language->get('error_country');
@@ -291,11 +291,11 @@ class ControllerCheckoutGuest extends Controller {
 				$this->session->data['payment_address']['zone_code'] = '';
 			}
 
-			if (!empty($this->request->post['shipping_address'])) {
+			/*if (!empty($this->request->post['shipping_address'])) {
 				$this->session->data['guest']['shipping_address'] = $this->request->post['shipping_address'];
-			} else {
+			} else {*/
 				$this->session->data['guest']['shipping_address'] = false;
-			}
+			/*}*/
 
 			if ($this->session->data['guest']['shipping_address']) {
 				$this->session->data['shipping_address']['firstname'] = $this->request->post['firstname'];
