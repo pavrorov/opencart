@@ -164,10 +164,10 @@
   <div class="col-sm-6">
     <fieldset id="address">
       <legend>{{ text_your_address }}</legend>
-      <div class="form-group">
+      <!--div class="form-group">
         <label class="control-label" for="input-payment-company">{{ entry_company }}</label>
         <input type="text" name="company" value="" placeholder="{{ entry_company }}" id="input-payment-company" class="form-control" />
-      </div>
+      </div-->
       <div class="form-group required">
         <label class="control-label" for="input-payment-address-1">{{ entry_address_1 }}</label>
         <input type="text" name="address_1" value="" placeholder="{{ entry_address_1 }}" id="input-payment-address-1" class="form-control" />
@@ -338,7 +338,7 @@
 </div>
 <div class="checkbox">
   <label for="newsletter">
-    <input type="checkbox" name="newsletter" value="1" id="newsletter" />
+    <input type="checkbox" name="newsletter" value="1" id="newsletter" checked="checked" />
     {{ entry_newsletter }}</label>
 </div>
 {% if shipping_required %}
