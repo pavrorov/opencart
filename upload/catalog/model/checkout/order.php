@@ -263,7 +263,15 @@ class ModelCheckoutOrder extends Model {
 			
 	public function addOrderHistory($order_id, $order_status_id, $comment = '', $notify = false, $override = false) {
 		$order_info = $this->getOrder($order_id);
-		
+
+		$shipping_instruction =
+		  $this->config->get($order_info['shipping_code'].'.instruction');
+
+		if ($shipping_instruction) {
+			$comment .= "\n\n";
+			$comment .= $shipping_instruction;
+		}
+
 		if ($order_info) {
 			// Fraud Detection
 			$this->load->model('account/customer');
